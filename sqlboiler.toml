@@ -1,0 +1,9 @@
+[psql]
+dbname = 'postgres'
+user = 'postgres'
+pass = 'password'
+host = 'localhost'
+port = 5432
+no-hook = true
+no-tests = true
+sslmode = 'disable'

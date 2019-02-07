@@ -5,9 +5,10 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/andradei/sqlboiler-case/models"
 	_ "github.com/lib/pq"
 	"github.com/volatiletech/sqlboiler/boil"
+
+	"github.com/andradei/sqlboiler-case/models"
 )
 
 func main() {
@@ -26,21 +27,18 @@ func main() {
 		Age:  32,
 	}
 
-	trident := &models.Thing{
-		Name: "Trident of Atlantis",
-	}
-
-	err = trident.Insert(context.Background(), db, boil.Infer())
-	if err != nil {
-		panic(fmt.Sprintln("no inserting thing:", err))
-	}
-	err = aquaman.AddThings(context.Background(), db, false, trident)
-	if err != nil {
-		panic(fmt.Sprintln("no adding:", err))
-	}
-
 	err = aquaman.Insert(context.Background(), db, boil.Infer())
 	if err != nil {
 		panic(fmt.Sprintln("no inserting person:", err))
 	}
+
+	trident := &models.Thing{
+		Name: "Trident of Atlantis",
+	}
+
+	err = aquaman.AddThings(context.Background(), db, true, trident)
+	if err != nil {
+		panic(fmt.Sprintln("no adding:", err))
+	}
+
 }
